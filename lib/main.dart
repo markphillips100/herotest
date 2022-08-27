@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Hero Rotation Demo',
       routeInformationParser: const RoutemasterParser(),
-      routeInformationProvider: PlatformRouteInformationProvider(initialRouteInformation: const RouteInformation(location: "/wide-layout")),
+      routeInformationProvider: PlatformRouteInformationProvider(initialRouteInformation: const RouteInformation(location: "/layout")),
       routerDelegate: RoutemasterDelegate(
         routesBuilder: (context) {
           final responsiveView = Responsive.responsiveView(context);
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
           return RouteMap(
               routes: {
-                '/wide-layout': (_) {
+                '/layout': (_) {
                   return responsiveView != ResponsiveViewEnum.mobile
                   ? StackPage(
                     child: WideLayoutPage(
@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
                   )
                   : MaterialPageOne(title: "Mobile Layout");
                 },
-                '/wide-layout/two': (_) => const MaterialPageTwo(),
-                '/wide-layout/three': (_) => const MaterialPageThree(),
-                '/wide-layout/two/three': (_) => const MaterialPageThree(),
+                '/layout/two': (_) => const MaterialPageTwo(),
+                '/layout/three': (_) => const MaterialPageThree(),
+                '/layout/two/three': (_) => const MaterialPageThree(),
               },
             );
         },

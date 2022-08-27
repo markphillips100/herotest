@@ -15,9 +15,8 @@ class PageOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-    final inWideLayoutPage = WideLayoutPageScope.of(context) != null;
 
-    print("Build Page one. heroKeyPrefix: $heroKeyPrefix, inWideLayout: $inWideLayoutPage");
+    print("Build Page one. heroKeyPrefix: $heroKeyPrefix");
 
     return Scaffold(
       appBar: AppBar(title: Text(title)),
@@ -33,15 +32,12 @@ class PageOne extends StatelessWidget {
                 onPressed: () => Routemaster.of(context).push('three'),
                 child: const Text('Select three'),
               ),
-              if (!inWideLayoutPage) Hero(
+              Hero(
                 tag: "${heroKeyPrefix}hero1",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
               ),
-              if (inWideLayoutPage) Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
-                child: Image.network('https://picsum.photos/120?image=9')),
             ],
           ),
         ),
@@ -60,9 +56,8 @@ class PageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-    final inWideLayoutPage = WideLayoutPageScope.of(context) != null;
 
-    print("Build Page two. heroKeyPrefix: $heroKeyPrefix, inWideLayout: $inWideLayoutPage");
+    print("Build Page two. heroKeyPrefix: $heroKeyPrefix");
 
     return Scaffold(
       appBar: AppBar(title: const Text("Page Two")),
@@ -74,16 +69,12 @@ class PageTwo extends StatelessWidget {
                 onPressed: () => Routemaster.of(context).push('three'),
                 child: const Text('Select three'),
               ),
-
-              if (!inWideLayoutPage) Hero(
+              Hero(
                 tag: "${heroKeyPrefix}hero1",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
               ),
-              if (inWideLayoutPage) Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
-                child: Image.network('https://picsum.photos/120?image=9')),
               Hero(
                 tag: "${heroKeyPrefix}hero2",
                 child: Container(
@@ -108,9 +99,8 @@ class PageThree extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-    final inWideLayoutPage = WideLayoutPageScope.of(context) != null;
 
-    print("Build Page three. heroKeyPrefix: $heroKeyPrefix, inWideLayout: $inWideLayoutPage");
+    print("Build Page three. heroKeyPrefix: $heroKeyPrefix");
 
     return Scaffold(
       appBar: AppBar(title: const Text("Page Three")),
@@ -128,20 +118,6 @@ class PageThree extends StatelessWidget {
                   decoration: BoxDecoration(border: Border.all(color: Colors.green, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
               ),
-
-              // Responsive(
-              //   mobile: Hero(
-              //     tag: "mobile-hero1",
-              //     child: Container(
-              //       decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
-              //       child: Image.network('https://picsum.photos/250?image=9'))),
-              //   tablet: Hero(
-              //     tag: "tablet-hero1",
-              //     child: Container(
-              //         decoration: BoxDecoration(border: Border.all(color: Colors.green, width: 4.0)),
-              //       child: Image.network('https://picsum.photos/250?image=9')),
-              //   ),
-              // ),
             ],
           ),
         ),
