@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
-import 'wide_layout.dart';
-
 class MaterialPageOne extends MaterialPage<void> {
   MaterialPageOne({required String title})
   : super(child: PageOne(title: title));
@@ -14,10 +12,6 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-
-    print("Build Page one. heroKeyPrefix: $heroKeyPrefix");
-
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: SingleChildScrollView(
@@ -33,7 +27,7 @@ class PageOne extends StatelessWidget {
                 child: const Text('Select three'),
               ),
               Hero(
-                tag: "${heroKeyPrefix}hero1",
+                tag: "hero1",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
@@ -55,10 +49,6 @@ class PageTwo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-
-    print("Build Page two. heroKeyPrefix: $heroKeyPrefix");
-
     return Scaffold(
       appBar: AppBar(title: const Text("Page Two")),
       body: SingleChildScrollView(
@@ -70,13 +60,13 @@ class PageTwo extends StatelessWidget {
                 child: const Text('Select three'),
               ),
               Hero(
-                tag: "${heroKeyPrefix}hero1",
+                tag: "hero1",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.blue, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
               ),
               Hero(
-                tag: "${heroKeyPrefix}hero2",
+                tag: "hero2",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.green, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),
@@ -98,10 +88,6 @@ class PageThree extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final heroKeyPrefix = HeroControllerScopeKey.of(context)?.heroKeyPrefix ?? "";
-
-    print("Build Page three. heroKeyPrefix: $heroKeyPrefix");
-
     return Scaffold(
       appBar: AppBar(title: const Text("Page Three")),
       body: SingleChildScrollView(
@@ -113,7 +99,7 @@ class PageThree extends StatelessWidget {
                 child: const Text('Pop'),
               ),
               Hero(
-                tag: "${heroKeyPrefix}hero2",
+                tag: "hero2",
                 child: Container(
                   decoration: BoxDecoration(border: Border.all(color: Colors.green, width: 4.0)),
                   child: Image.network('https://picsum.photos/120?image=9')),

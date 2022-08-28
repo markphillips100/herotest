@@ -16,8 +16,14 @@ class CustomHeroController extends HeroController {
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    print("CustomHeroController [$name].  didPush called.");
 
+    if (route is PageRoute<dynamic> && route.animation?.status == AnimationStatus.dismissed) {
+      print("CustomHeroController [$name].  didPush called. route: ${route.settings.runtimeType}, previousRoute: ${previousRoute?.settings.runtimeType}, toRoute animation status is dismissed so ignore push.");
+
+      return;
+    }
+
+    print("CustomHeroController [$name].  didPush called. route: ${route.settings.runtimeType}, previousRoute: ${previousRoute?.settings.runtimeType}");
     super.didPush(route, previousRoute);
   }
 }

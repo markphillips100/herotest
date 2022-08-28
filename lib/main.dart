@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:herotest/responsive.dart';
 import 'package:routemaster/routemaster.dart';
 
+import 'custom_hero_controller.dart';
 import 'pages.dart';
 import 'wide_layout.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
+  // Use this controller to support bypass possible hero animation if the toRoute animation is already dismissed.
+  final mainHeroController = CustomHeroController.createMaterialHeroController("main");
+  // Use this controller to show assertion.
+  // final mainHeroController = MaterialApp.createMaterialHeroController();
+
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -19,7 +26,15 @@ class MyApp extends StatelessWidget {
       title: 'Hero Rotation Demo',
       routeInformationParser: const RoutemasterParser(),
       routeInformationProvider: PlatformRouteInformationProvider(initialRouteInformation: const RouteInformation(location: "/layout")),
-      routerDelegate: RoutemasterDelegate(
+      routerDelegate: RoutemasterDelegate.builder(
+        navigatorBuilder: (context, stack) {
+          return HeroControllerScope(
+            controller: mainHeroController,
+            child: PageStackNavigator(
+              stack: stack,
+            ),
+          );
+        },
         routesBuilder: (context) {
           final responsiveView = Responsive.responsiveView(context);
           print("Current responsive view is ${responsiveView.toString()}");
