@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:routemaster/routemaster.dart';
 
+import 'hero_controller_scope_key.dart';
 import 'wide_layout.dart';
 
 class MaterialPageOne extends MaterialPage<void> {
@@ -25,12 +25,8 @@ class PageOne extends StatelessWidget {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: () => Routemaster.of(context).push('two'),
+                onPressed: () => Navigator.of(context).pushNamed("/two"),
                 child: const Text('Select two'),
-              ),
-              ElevatedButton(
-                onPressed: () => Routemaster.of(context).push('three'),
-                child: const Text('Select three'),
               ),
               Hero(
                 tag: "${heroKeyPrefix}hero1",
@@ -66,7 +62,7 @@ class PageTwo extends StatelessWidget {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: () => Routemaster.of(context).push('three'),
+                onPressed: () => Navigator.of(context).pushNamed("/two/three"),
                 child: const Text('Select three'),
               ),
               Hero(
@@ -109,7 +105,7 @@ class PageThree extends StatelessWidget {
           child: Column(
             children: [
               ElevatedButton(
-                onPressed: () => Routemaster.of(context).pop(),
+                onPressed: () => Navigator.of(context).pop(),
                 child: const Text('Pop'),
               ),
               Hero(

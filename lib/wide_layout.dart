@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:routemaster/routemaster.dart';
 
 import 'CustomHeroController.dart';
+import 'hero_controller_scope_key.dart';
 import 'split_view_container.dart';
 
 class WideLayoutPage extends StatefulWidget {
   final Widget child;
+  final Navigator Function() navigatorBuilder;
 
 //  final HeroController heroController = MaterialApp.createMaterialHeroController();
   final HeroController heroController = CustomHeroController.createMaterialHeroController("wide");
@@ -13,23 +14,11 @@ class WideLayoutPage extends StatefulWidget {
   WideLayoutPage({
     Key? key,
     required this.child,
+    required this.navigatorBuilder,
   }) : super(key: key);
 
   @override
   State<WideLayoutPage> createState() => _WideLayoutPageState();
-}
-
-class HeroControllerScopeKey extends InheritedWidget {
-  final String heroKeyPrefix;
-
-  const HeroControllerScopeKey({Key? key, required this.heroKeyPrefix, required Widget child})
-  : super(child: child);
-
-  bool updateShouldNotify(HeroControllerScopeKey oldWidget) =>
-    oldWidget.heroKeyPrefix != heroKeyPrefix;
-
-  static HeroControllerScopeKey? of(BuildContext context) =>
-    context.dependOnInheritedWidgetOfExactType<HeroControllerScopeKey>();
 }
 
 class _WideLayoutPageState extends State<WideLayoutPage> {
@@ -41,9 +30,7 @@ class _WideLayoutPageState extends State<WideLayoutPage> {
         heroKeyPrefix: "wide-",
         child: HeroControllerScope(
           controller: widget.heroController,
-          child: PageStackNavigator(
-            stack: StackPage.of(context).stack,
-          ),
+          child: widget.navigatorBuilder(),
         ),
       ),
     );
