@@ -13,9 +13,9 @@ void main() {
 class MyApp extends StatelessWidget {
 
   // Use this controller to support bypass possible hero animation if the toRoute animation is already dismissed.
-  final mainHeroController = CustomHeroController.createMaterialHeroController("main");
+  // final mainHeroController = CustomHeroController.createMaterialHeroController();
   // Use this controller to show assertion.
-  // final mainHeroController = MaterialApp.createMaterialHeroController();
+  final mainHeroController = MaterialApp.createMaterialHeroController();
 
   MyApp({Key? key}) : super(key: key);
 
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Hero Rotation Demo',
       routeInformationParser: const RoutemasterParser(),
-      routeInformationProvider: PlatformRouteInformationProvider(initialRouteInformation: const RouteInformation(location: "/layout")),
+//      routeInformationProvider: PlatformRouteInformationProvider(initialRouteInformation: const RouteInformation(location: "/layout")),
       routerDelegate: RoutemasterDelegate.builder(
         navigatorBuilder: (context, stack) {
           return HeroControllerScope(
@@ -41,11 +41,15 @@ class MyApp extends StatelessWidget {
 
           return RouteMap(
               routes: {
+                '/':(route) => const Redirect("/layout"),
                 '/layout': (_) {
                   return responsiveView != ResponsiveViewEnum.mobile
                   ? StackPage(
-                    child: WideLayoutPage(
-                      child: const PageOne(title: "Wide Layout")),
+                    child: WillPopScope(
+                      onWillPop: () async => false,
+                      child: WideLayoutPage(
+                        child: const PageOne(title: "Wide Layout")),
+                    ),
                     defaultPath: 'two',
                   )
                   : MaterialPageOne(title: "Mobile Layout");
